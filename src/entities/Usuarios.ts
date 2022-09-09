@@ -5,7 +5,7 @@ import { Persongaem } from "./Personagem";
 @Entity("Usuarios")
 export class Usuario {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: Number;
 
   @Column({ type: "text" })
   nome: string;

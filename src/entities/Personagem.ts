@@ -3,14 +3,16 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Inventario } from "./Inventario";
 import { Usuario } from "./Usuarios";
 
 @Entity("Personagens")
 export class Persongaem {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: Number;
 
   @Column({ type: "text" })
   nome: string;
@@ -33,59 +35,63 @@ export class Persongaem {
   @Column({ type: "text" })
   patente: string;
 
-  @Column({ type: "text" })
-  idade: number;
+  @Column({ type: "numeric" })
+  idade: Number;
 
-  @Column({ type: "text" })
-  pv_atual: number;
+  @Column({ type: "numeric" })
+  pv_atual: Number;
 
-  @Column({ type: "text" })
-  ps_atual: number;
+  @Column({ type: "numeric" })
+  ps_atual: Number;
 
-  @Column({ type: "text" })
-  pe_atual: number;
+  @Column({ type: "numeric" })
+  pe_atual: Number;
 
-  @Column({ type: "text" })
-  pv_max: number;
+  @Column({ type: "numeric" })
+  pv_max: Number;
 
-  @Column({ type: "text" })
-  ps_max: number;
+  @Column({ type: "numeric" })
+  ps_max: Number;
 
-  @Column({ type: "text" })
-  pe_max: number;
+  @Column({ type: "numeric" })
+  pe_max: Number;
 
-  @Column({ type: "text" })
-  res_fisica: number;
+  @Column({ type: "numeric" })
+  res_fisica: Number;
 
-  @Column({ type: "text" })
-  res_balistica: number;
+  @Column({ type: "numeric" })
+  res_balistica: Number;
 
-  @Column({ type: "text" })
-  res_sangue: number;
+  @Column({ type: "numeric" })
+  res_sangue: Number;
 
-  @Column({ type: "text" })
-  res_morte: number;
+  @Column({ type: "numeric" })
+  res_morte: Number;
 
-  @Column({ type: "text" })
-  res_energia: number;
+  @Column({ type: "numeric" })
+  res_energia: Number;
 
-  @Column({ type: "text" })
-  res_conhecimento: number;
+  @Column({ type: "numeric" })
+  res_conhecimento: Number;
 
-  @Column({ type: "text" })
-  forca: number;
+  @Column({ type: "numeric" })
+  forca: Number;
 
-  @Column({ type: "text" })
-  agilidade: number;
+  @Column({ type: "numeric" })
+  agilidade: Number;
 
-  @Column({ type: "text" })
-  inteligencia: number;
+  @Column({ type: "numeric" })
+  inteligencia: Number;
 
-  @Column({ type: "text" })
-  presenca: number;
+  @Column({ type: "numeric" })
+  presenca: Number;
 
-  @Column({ type: "text" })
-  vigor: number;
+  @Column({ type: "numeric" })
+  vigor: Number;
+
+  @OneToOne(() => Inventario, (inventario) => inventario.personagem)
+  @JoinColumn({ name: "invetario_id" })
+  inventario: Inventario;
 
   @ManyToOne(() => Usuario, (usuario) => usuario.personagens)
   @JoinColumn({ name: "usuario_id" })
