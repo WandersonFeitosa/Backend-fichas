@@ -5,18 +5,19 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import { Usuario } from "./Usuarios";
 
 @Entity("Mesas")
 export class Mesa {
   @PrimaryGeneratedColumn()
-  id: Number
+  id: Number;
 
   @Column({ type: "text" })
   titulo: string;
 
-  @Column({ type: "text" })
-  personagens: string;
+  @Column("text", { array: true })
+  id_personagens: string[];
 
   @ManyToOne(() => Usuario, (usuario) => usuario.mesas)
   @JoinColumn({ name: "usuario_id" })

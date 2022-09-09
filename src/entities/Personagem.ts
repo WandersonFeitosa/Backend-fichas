@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -10,7 +12,7 @@ import { Inventario } from "./Inventario";
 import { Usuario } from "./Usuarios";
 
 @Entity("Personagens")
-export class Persongaem {
+export class Personagaem {
   @PrimaryGeneratedColumn()
   id: Number;
 
@@ -95,5 +97,5 @@ export class Persongaem {
 
   @ManyToOne(() => Usuario, (usuario) => usuario.personagens)
   @JoinColumn({ name: "usuario_id" })
-  usuario: Usuario;
+  usuario: Usuario;  
 }

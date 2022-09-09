@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Item } from "./Item";
-import { Persongaem } from "./Personagem";
+import { Personagaem } from "./Personagem";
 
 @Entity("Inventarios")
 export class Inventario {
@@ -21,9 +21,9 @@ export class Inventario {
   @Column({ type: "numeric" })
   capacidade: Number;
 
-  @OneToOne(() => Persongaem, (personagem) => personagem.inventario)
+  @OneToOne(() => Personagaem, (personagem) => personagem.inventario)
   @JoinColumn({ name: "personagaem_id" })
-  personagem: Persongaem;
+  personagem: Personagaem;
 
   @ManyToMany(() => Item, (item) => item.inventarios)
   @JoinTable({
