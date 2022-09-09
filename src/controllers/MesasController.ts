@@ -3,13 +3,10 @@ import { mesasReposiory } from "../repositories/mesasRepository";
 
 export class MesasController {
   async create(req: Request, res: Response) {
-    const { titulo, id_personagens } = req.body;
+    const { titulo } = req.body;
 
     try {
-      const newMesa = mesasReposiory.create({
-        titulo,
-        id_personagens,
-      });
+      const newMesa = mesasReposiory.create({ titulo });
 
       await mesasReposiory.save(newMesa);
       return res.status(201).json({ newMesa });

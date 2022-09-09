@@ -9,24 +9,22 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Inventario } from "./Inventario";
+import { Mesa } from "./Mesa";
 import { Usuario } from "./Usuarios";
 
 @Entity("Personagens")
-export class Personagaem {
+export class Personagem {
   @PrimaryGeneratedColumn()
   id: Number;
 
   @Column({ type: "text" })
-  nome: string;
-
-  @Column({ type: "text" })
-  personagens: string;
+  nome: string; 
 
   @Column({ type: "text" })
   origem: string;
 
-  @Column({ type: "text" })
-  nex: string;
+  @Column({ type: "numeric" })
+  nex: Number;
 
   @Column({ type: "text" })
   classe: string;
@@ -91,6 +89,7 @@ export class Personagaem {
   @Column({ type: "numeric" })
   vigor: Number;
 
+
   @OneToOne(() => Inventario, (inventario) => inventario.personagem)
   @JoinColumn({ name: "invetario_id" })
   inventario: Inventario;
@@ -98,4 +97,8 @@ export class Personagaem {
   @ManyToOne(() => Usuario, (usuario) => usuario.personagens)
   @JoinColumn({ name: "usuario_id" })
   usuario: Usuario;  
+
+  @ManyToOne(() => Mesa, (mesa) => mesa.personagens)
+  @JoinColumn({ name: "mesa_id" })
+  mesa: Mesa;
 }

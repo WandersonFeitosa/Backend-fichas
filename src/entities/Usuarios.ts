@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Mesa } from "./Mesa";
-import { Personagaem } from "./Personagem";
+import { Personagem } from "./Personagem";
 
 @Entity("Usuarios")
 export class Usuario {
@@ -25,6 +25,6 @@ export class Usuario {
   @OneToMany(() => Mesa, (mesa) => mesa.usuario)
   mesas: Mesa[];
 
-  @OneToMany(() => Personagaem, (personagem) => personagem.usuario)
-  personagens: Personagaem[];
+  @OneToMany(() => Personagem, (personagem) => personagem.usuario)
+  personagens: Personagem[];
 }

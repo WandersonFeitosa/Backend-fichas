@@ -3,8 +3,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Personagem } from "./Personagem";
 
 import { Usuario } from "./Usuarios";
 
@@ -16,8 +18,8 @@ export class Mesa {
   @Column({ type: "text" })
   titulo: string;
 
-  @Column("text", { array: true })
-  id_personagens: string[];
+  @OneToMany(() => Personagem, (personagem) => personagem.mesa)
+  personagens: Personagem[];
 
   @ManyToOne(() => Usuario, (usuario) => usuario.mesas)
   @JoinColumn({ name: "usuario_id" })
