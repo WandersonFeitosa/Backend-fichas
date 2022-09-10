@@ -14,11 +14,11 @@ import { Usuario } from "./Usuarios";
 
 @Entity("Personagens")
 export class Personagem {
-  @PrimaryGeneratedColumn()
-  id: Number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ type: "text" })
-  nome: string; 
+  nome: string;
 
   @Column({ type: "text" })
   origem: string;
@@ -26,16 +26,16 @@ export class Personagem {
   @Column({ type: "numeric" })
   nex: Number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   classe: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   trilha: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   patente: string;
 
-  @Column({ type: "numeric" })
+  @Column({ type: "numeric", nullable: true })
   idade: Number;
 
   @Column({ type: "numeric" })
@@ -89,14 +89,13 @@ export class Personagem {
   @Column({ type: "numeric" })
   vigor: Number;
 
-
   @OneToOne(() => Inventario, (inventario) => inventario.personagem)
   @JoinColumn({ name: "invetario_id" })
   inventario: Inventario;
 
   @ManyToOne(() => Usuario, (usuario) => usuario.personagens)
   @JoinColumn({ name: "usuario_id" })
-  usuario: Usuario;  
+  usuario: Usuario;
 
   @ManyToOne(() => Mesa, (mesa) => mesa.personagens)
   @JoinColumn({ name: "mesa_id" })

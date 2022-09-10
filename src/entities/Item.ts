@@ -3,36 +3,30 @@ import { Inventario } from "./Inventario";
 
 @Entity("Itens")
 export class Item {
-  @PrimaryGeneratedColumn()
-  id: Number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ type: "text" })
   nome: string;
 
-  @Column({ type: "text" })
-  modificadores: string;
-
-  @Column({ type: "numeric" })
+  @Column({ type: "numeric", nullable: true })
   crit: Number;
 
-  @Column({ type: "numeric" })
+  @Column({ type: "numeric", nullable: true })
   ameaca: Number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   dano_arma: string;
-
-  @Column({ type: "text" })
-  dano_modificadores: string;
 
   @Column({ type: "numeric" })
   categoria: Number;
 
-  @Column({ type: "numeric" })
+  @Column({ type: "numeric", nullable: true })
   tamanho: Number;
+
+  @Column({ type: "text", nullable: true })
+  info: string;
 
   @ManyToMany(() => Inventario, (inventario) => inventario.itens)
   inventarios: Inventario[];
-
-  @Column({ type: "text" })
-  info: string;
 }

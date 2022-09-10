@@ -12,8 +12,8 @@ import { Usuario } from "./Usuarios";
 
 @Entity("Mesas")
 export class Mesa {
-  @PrimaryGeneratedColumn()
-  id: Number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ type: "text" })
   titulo: string;

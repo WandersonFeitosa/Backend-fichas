@@ -12,8 +12,8 @@ import { Personagem } from "./Personagem";
 
 @Entity("Inventarios")
 export class Inventario {
-  @PrimaryGeneratedColumn()
-  id: Number;  
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ type: "numeric" })
   capacidade: Number;

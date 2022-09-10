@@ -1,11 +1,12 @@
+import { RandomUUIDOptions } from "crypto";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Mesa } from "./Mesa";
 import { Personagem } from "./Personagem";
 
 @Entity("Usuarios")
 export class Usuario {
-  @PrimaryGeneratedColumn()
-  id: Number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ type: "text" })
   nome: string;
