@@ -1,9 +1,7 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
+  JoinColumn, 
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -91,7 +89,7 @@ export class Personagem {
 
   @OneToOne(() => Inventario, (inventario) => inventario.personagem)
   @JoinColumn({ name: "invetario_id" })
-  inventario: Inventario;
+  inventario: string;
 
   @ManyToOne(() => Usuario, (usuario) => usuario.personagens)
   @JoinColumn({ name: "usuario_id" })

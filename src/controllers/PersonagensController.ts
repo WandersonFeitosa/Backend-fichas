@@ -24,9 +24,6 @@ export class PersonagensController {
     var pv_max;
     var pe_max;
     var ps_max;
-    const pv_atual = pv_max;
-    const ps_atual = ps_max;
-    const pe_atual = pe_max;
     const res_fisica = 0;
     const res_balistica = 0;
     const res_sangue = 0;
@@ -82,7 +79,9 @@ export class PersonagensController {
       const ps_nivel_nex = nivel_nex * 5;
       ps_max = 20 + ps_nivel_nex;
     }
-
+    const pv_atual = pv_max;
+    const ps_atual = ps_max;
+    const pe_atual = pe_max;
     //CHECAR USUARIO
     const { idUsuario } = req.params;
 
@@ -159,6 +158,28 @@ export class PersonagensController {
       });
 
       return res.status(200).json(personagem);
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error", error });
+    }
+  }
+
+  async list(req: Request, res: Response) {
+    const { idUsuario } = req.params;
+
+    try {
+      const personagens = await personagensReposiory.find({
+        where: {
+          usuario: {
+            id: idUsuario,
+          },
+        },
+      });      
+
+      if (!personagens) {
+        return res.json("O usuário ainda não possui personagens");
+      }
+
+      return res.json(personagens);
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }

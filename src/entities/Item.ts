@@ -1,5 +1,14 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Inventario } from "./Inventario";
+import { Usuario } from "./Usuarios";
 
 @Entity("Itens")
 export class Item {
@@ -27,6 +36,11 @@ export class Item {
   @Column({ type: "text", nullable: true })
   info: string;
 
-  @ManyToMany(() => Inventario, (inventario) => inventario.itens)
+  @ManyToOne(() => Usuario, (usuario) => usuario.itens)
+  @JoinColumn({ name: "usuario_id" })
+  usuario: Usuario;
+
+  @ManyToMany(() => Inventario, (inventario) => inventario.itens )
+  @JoinTable()
   inventarios: Inventario[];
 }

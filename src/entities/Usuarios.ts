@@ -1,5 +1,5 @@
-import { RandomUUIDOptions } from "crypto";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Item } from "./Item";
 import { Mesa } from "./Mesa";
 import { Personagem } from "./Personagem";
 
@@ -28,4 +28,7 @@ export class Usuario {
 
   @OneToMany(() => Personagem, (personagem) => personagem.usuario)
   personagens: Personagem[];
+
+  @OneToMany(() => Item, (item) => item.usuario)
+  itens: Item[];
 }

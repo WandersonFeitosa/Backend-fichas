@@ -7,12 +7,33 @@ import { UsuariosController } from "../controllers/UsuariosController";
 
 const routes = Router();
 
+//ROTAS DE USUARIO
 routes.post("/usuario", new UsuariosController().create);
+
+//ROTAS DE MESA
+routes.get("/mesa/:idUsuario", new MesasController().listMesas);
+routes.get("/listarPersonagens/:idMesa", new MesasController().listPersonagensMesa);
 routes.post("/mesa/:idUsuario", new MesasController().create);
+
+//ROTAS DE PERSONGAEM
+routes.get("/personagem/:idUsuario", new PersonagensController().list);
 routes.post("/personagem/:idUsuario", new PersonagensController().create);
-routes.post("/vincularmesa/:idPersonagem", new PersonagensController().vincularMesa);
-routes.post("/adicionarItem/:idInventario", new InventariosController().adicionarItem);
-routes.post("/inventario", new InventariosController().create);
-routes.post("/item", new ItensController().create);
+routes.patch(
+  "/vincularMesa/:idPersonagem",
+  new PersonagensController().vincularMesa
+);
+
+//ROTAS DE INVETARIO
+routes.get("/inventario/:idPersonagem", new InventariosController().list);
+routes.post("/inventario/:idPersonagem", new InventariosController().create);
+routes.post(
+  "/adicionarItem/:idInventario",
+  new InventariosController().adicionarItem
+);
+
+//ROTAS DE ITEM
+routes.get("/item/:idUsuario", new ItensController().list);
+routes.post("/item/:idUsuario", new ItensController().create);
+
 
 export default routes;

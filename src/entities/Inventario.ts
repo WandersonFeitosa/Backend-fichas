@@ -2,7 +2,6 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -22,17 +21,6 @@ export class Inventario {
   @JoinColumn({ name: "personagem_id" })
   personagem: Personagem;
 
-  @ManyToMany(() => Item, (item) => item.inventarios)
-  @JoinTable({
-    name: "item_inventario",
-    joinColumn: {
-      name: "item_id",
-      referencedColumnName: "id",
-    },
-    inverseJoinColumn: {
-      name: "inventario_id",
-      referencedColumnName: "id",
-    },
-  })
+  @ManyToMany(() => Item, (item) => item.inventarios)  
   itens: Item[];
 }
