@@ -4,15 +4,24 @@ import { ItensController } from "../controllers/ItensController";
 import { MesasController } from "../controllers/MesasController";
 import { PersonagensController } from "../controllers/PersonagensController";
 import { UsuariosController } from "../controllers/UsuariosController";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
 const routes = Router();
 
 //ROTAS DE USUARIO
 routes.post("/usuario", new UsuariosController().create);
+routes.post("/login", new UsuariosController().login);
+
+routes.use(authMiddleware);
+
+routes.get("/profile", new UsuariosController().getProfile);
 
 //ROTAS DE MESA
 routes.get("/mesa/:idUsuario", new MesasController().listMesas);
-routes.get("/listarPersonagens/:idMesa", new MesasController().listPersonagensMesa);
+routes.get(
+  "/listarPersonagens/:idMesa",
+  new MesasController().listPersonagensMesa
+);
 routes.post("/mesa/:idUsuario", new MesasController().create);
 
 //ROTAS DE PERSONGAEM
@@ -34,6 +43,5 @@ routes.post(
 //ROTAS DE ITEM
 routes.get("/item/:idUsuario", new ItensController().list);
 routes.post("/item/:idUsuario", new ItensController().create);
-
 
 export default routes;

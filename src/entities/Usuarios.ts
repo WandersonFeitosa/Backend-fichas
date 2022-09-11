@@ -14,10 +14,10 @@ export class Usuario {
   @Column({ type: "text", nullable: true })
   sobrenome: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", unique: true })
   username: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", unique: true })
   email: string;
 
   @Column({ type: "text" })
