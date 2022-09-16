@@ -16,22 +16,25 @@ export const authMiddleware = async (
   if (!authorization) {
     return res.status(401).json({ message: "NÃO AUTORIZADO" });
   }
+  try {
+    //FORMATAR TOKEN
+    const token = authorization.split(" ")[1];
 
-  //FORMATAR TOKEN
-  const token = authorization.split(" ")[1];
+    //BUSCAR ID DO TOKEN
+    const { id } = jwt.verify(token, process.env.JWT_PASS ?? "") as JwtPayload;
 
-  //BUSCAR ID DO TOKEN
-  const { id } = jwt.verify(token, process.env.JWT_PASS ?? "") as JwtPayload;
+    //VERIFICAR USUARIO
+    const user = await usuarioReposiory.findOneBy({ id });
 
-  //VERIFICAR USUARIO
-  const user = await usuarioReposiory.findOneBy({ id });
+    if (!user) {
+      return res.status(401).json({ message: "NÃO AUTORIZADO" });
+    }
+    const { senha: _, ...loggedUser } = user;
 
-  if (!user) {
-    return res.status(401).json({ message: "NÃO AUTORIZADO" });
+    req.user = loggedUser;
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error", error });
   }
-  const { senha: _, ...loggedUser } = user;
-
-  req.user = loggedUser;
-
-  next();
 };

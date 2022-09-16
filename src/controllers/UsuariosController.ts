@@ -62,9 +62,7 @@ export class UsuariosController {
       return res.status(400).json({ message: "Username ou senha invalidos" });
     }
 
-    const token = jwt.sign({ id: username.id }, process.env.JWT_PASS ?? "", {
-      expiresIn: "8h",
-    });
+    const token = jwt.sign({ id: username.id }, process.env.JWT_PASS ?? "");
 
     return res.json({
       message: "tá logado",
