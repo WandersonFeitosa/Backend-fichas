@@ -17,6 +17,7 @@ export class PersonagensController {
       agilidade,
       inteligencia,
       presenca,
+      afinidade,
       vigor,
     } = req.body;
 
@@ -108,6 +109,7 @@ export class PersonagensController {
         inteligencia,
         presenca,
         vigor,
+        afinidade,
         pv_max,
         ps_max,
         pe_max,

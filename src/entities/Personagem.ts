@@ -36,6 +36,9 @@ export class Personagem {
   @Column({ type: "numeric", nullable: true })
   idade: Number;
 
+  @Column({ type: "text", nullable: true })
+  afinidade: String;
+
   @Column({ type: "numeric" })
   pv_atual: Number;
 
