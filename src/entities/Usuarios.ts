@@ -2,6 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Item } from "./Item";
 import { Mesa } from "./Mesa";
 import { Personagem } from "./Personagem";
+import { Poder } from "./Poder";
+import { Ritual } from "./Ritual";
 
 @Entity("Usuarios")
 export class Usuario {
@@ -31,4 +33,10 @@ export class Usuario {
 
   @OneToMany(() => Item, (item) => item.usuario)
   itens: Item[];
+
+  @OneToMany(() => Ritual, (ritual) => ritual.usuario)
+  rituais: Ritual[];
+
+  @OneToMany(() => Poder, (poder) => poder.usuario)
+  poderes: Poder[];
 }

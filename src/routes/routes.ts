@@ -3,6 +3,8 @@ import { InventariosController } from "../controllers/InventariosController";
 import { ItensController } from "../controllers/ItensController";
 import { MesasController } from "../controllers/MesasController";
 import { PersonagensController } from "../controllers/PersonagensController";
+import { PoderesController } from "../controllers/PoderesController";
+import { RituaisController } from "../controllers/RituaisController";
 import { UsuariosController } from "../controllers/UsuariosController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
@@ -43,5 +45,11 @@ routes.post(
 //ROTAS DE ITEM
 routes.get("/item/:idUsuario", new ItensController().list);
 routes.post("/item/:idUsuario", new ItensController().create);
+
+//ROTAS DE RITUAL
+routes.post("/ritual/:idUsuario", new RituaisController().create);
+
+//ROTAS DE PODER
+routes.post("/poder/:idUsuario", new PoderesController().create);
 
 export default routes;
