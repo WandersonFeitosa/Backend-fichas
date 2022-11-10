@@ -79,7 +79,7 @@
 
     
 
-- Node - 12.12;
+- Node - 18.12;
 
 Dependências internas do projeto podem ser encontrada na raiz dentro do package.json, e podem ser instaladas através  do seguinte comando
 ```
