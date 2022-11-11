@@ -13,11 +13,11 @@
 
 <img  src="http://img.shields.io/static/v1?label=&message=Typescript&color=blue&style=for-the-badge"/>
 
-  <img  src="http://img.shields.io/static/v1?label=&message=Node&color=green&style=for-the-badge"/>
+<img  src="http://img.shields.io/static/v1?label=&message=Node&color=green&style=for-the-badge"/>
 
   
 
-<img  src="http://img.shields.io/static/v1?label=STATUS&message=Em andamento&color=yellow&style=for-the-badge"/>
+<img  src="http://img.shields.io/static/v1?label=STATUS&message=Em&nbspandamento&color=yellow&style=for-the-badge"/>
 
   
 
