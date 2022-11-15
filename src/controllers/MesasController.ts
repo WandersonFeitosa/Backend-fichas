@@ -5,13 +5,11 @@ import { usuarioReposiory } from "../repositories/usuariosRepository";
 
 export class MesasController {
   async create(req: Request, res: Response) {
-    const { titulo } = req.body;
-
-    const { idUsuario } = req.params;
+    const { titulo, id_usuario } = req.body;
 
     try {
       const usuario = await usuarioReposiory.findOneBy({
-        id: String(idUsuario),
+        id: String(id_usuario),
       });
 
       if (!usuario) {
@@ -25,19 +23,18 @@ export class MesasController {
 
       await mesasReposiory.save(newMesa);
 
-      return res.status(201).json(newMesa);
+      return res.status(201).json({ message: "Mesa criada com sucesso" });
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
   async listMesas(req: Request, res: Response) {
-    const { idUsuario } = req.params;
-
+    const { id_usuario } = req.body;
     try {
       const mesas = await mesasReposiory.find({
         where: {
           usuario: {
-            id: idUsuario,
+            id: id_usuario,
           },
         },
       });
@@ -52,13 +49,13 @@ export class MesasController {
     }
   }
   async listPersonagensMesa(req: Request, res: Response) {
-    const { idMesa } = req.params;
+    const { id_usuario } = req.body;
 
     try {
       const personagens = await personagensReposiory.find({
         where: {
           mesa: {
-            id: idMesa,
+            id: id_usuario,
           },
         },
       });

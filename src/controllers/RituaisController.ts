@@ -23,14 +23,13 @@ export class RituaisController {
       circulo_verdadeiro,
       funcoes_verdadeiro,
       resistencia_verdadeiro,
-    
     } = req.body;
 
-    const { idUsuario } = req.params;
+    const { id_usuario } = req.body;
     try {
       //CHECAR USUARIO
       const usuario = await usuarioReposiory.findOneBy({
-        id: String(idUsuario),
+        id: String(id_usuario),
       });
 
       if (!usuario) {

@@ -47,6 +47,7 @@ export class PersonagensController {
       tatica,
       tecnologia,
       vontade,
+      id_usuario,
     } = req.body;
 
     //DEFAULT VALUES
@@ -116,11 +117,10 @@ export class PersonagensController {
     const ps_atual = ps_max;
     const pe_atual = pe_max;
     //CHECAR USUARIO
-    const { idUsuario } = req.params;
 
     try {
       const usuario = await usuarioReposiory.findOneBy({
-        id: String(idUsuario),
+        id: String(id_usuario),
       });
 
       if (!usuario) {
@@ -196,12 +196,12 @@ export class PersonagensController {
   }
 
   async vincularMesa(req: Request, res: Response) {
-    const { mesa_id } = req.body;
-    const { idPersonagem } = req.params;
+    const { id_mesa, personagem_id } = req.body;
+
     try {
       //VERIFICAR PERSONAGEM
       const personagem = await personagensReposiory.findOneBy({
-        id: String(idPersonagem),
+        id: String(personagem_id),
       });
 
       if (!personagem) {
@@ -210,14 +210,14 @@ export class PersonagensController {
 
       //VERIFICAR MESA
 
-      const mesa = await mesasReposiory.findOneBy({ id: mesa_id });
+      const mesa = await mesasReposiory.findOneBy({ id: id_mesa });
 
       if (!mesa) {
         return res.status(404).json({ message: "A mesa não existe" });
       }
 
       //VINCULAR MESA
-      await personagensReposiory.update(idPersonagem, {
+      await personagensReposiory.update(personagem_id, {
         ...personagem,
         mesa: mesa,
       });
@@ -229,13 +229,13 @@ export class PersonagensController {
   }
 
   async list(req: Request, res: Response) {
-    const { idUsuario } = req.params;
+    const {  id_usuario } = req.body;
 
     try {
       const personagens = await personagensReposiory.find({
         where: {
           usuario: {
-            id: idUsuario,
+            id: id_usuario,
           },
         },
       });

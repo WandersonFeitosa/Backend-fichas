@@ -4,12 +4,23 @@ import { usuarioReposiory } from "../repositories/usuariosRepository";
 
 export class ItensController {
   async create(req: Request, res: Response) {
-    const { nome, crit, ameaca, dano_arma, categoria, tamanho, info } =
-      req.body;
-    const { idUsuario } = req.params;
+    const {
+      nome,
+      crit,
+      ameaca,
+      dano_arma,
+      categoria,
+      tamanho,
+      info,
+      dano_elemental,
+      elemento_maldicao,
+      id_usuario,
+      
+    } = req.body;
+
     try {
       const usuario = await usuarioReposiory.findOneBy({
-        id: String(idUsuario),
+        id: String(id_usuario),
       });
 
       if (!usuario) {
@@ -23,24 +34,25 @@ export class ItensController {
         categoria,
         tamanho,
         info,
+        dano_elemental,
+        elemento_maldicao,
         usuario,
       });
 
       await itensReposiory.save(newItem);
-      return res.status(201).json({ newItem });
+      return res.status(201).json({ message: "Item criado com sucesso" });
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
   async list(req: Request, res: Response) {
-    const { idUsuario } = req.params;
+    const { id_usuario } = req.body;
 
     try {
       const itens = await itensReposiory.find({
-       
         where: {
           usuario: {
-            id: idUsuario,
+            id: id_usuario,
           },
         },
       });

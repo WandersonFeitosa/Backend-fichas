@@ -36,6 +36,12 @@ export class Item {
   @Column({ type: "text", nullable: true })
   info: string;
 
+  @Column({ type: "text", nullable: true })
+  dano_elemental: string;
+
+  @Column({ type: "text", nullable: true })
+  elemento_maldicao: string;
+
   @ManyToOne(() => Usuario, (usuario) => usuario.itens)
   @JoinColumn({ name: "usuario_id" })
   usuario: Usuario;

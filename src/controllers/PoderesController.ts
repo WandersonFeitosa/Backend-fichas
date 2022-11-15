@@ -16,12 +16,13 @@ export class PoderesController {
       afinidade,
       melhoramento,
       funcao_melhoramento,
+      id_usuario
     } = req.body;
-    const { idUsuario } = req.params;
+
     try {
       //CHECAR USUARIO
       const usuario = await usuarioReposiory.findOneBy({
-        id: String(idUsuario),
+        id: String(id_usuario),
       });
 
       if (!usuario) {

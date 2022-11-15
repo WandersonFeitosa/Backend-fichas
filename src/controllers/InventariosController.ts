@@ -7,12 +7,12 @@ import { personagensReposiory } from "../repositories/personagensRepository";
 
 export class InventariosController {
   async create(req: Request, res: Response) {
-    const { idPersonagem } = req.params;
+    const { id_personagem } = req.body;
 
     try {
       // VERIFICAR PERSONAGEM
       const personagem = await personagensReposiory.findOneBy({
-        id: String(idPersonagem),
+        id: String(id_personagem),
       });
 
       if (!personagem) {
@@ -30,25 +30,24 @@ export class InventariosController {
         personagem,
       });
       await inventariosReposiory.save(newInventario);
-      await personagensReposiory.update(idPersonagem, {
+      await personagensReposiory.update(id_personagem, {
         ...personagem,
         inventario: newInventario.id,
       });
 
-      return res.status(201).json({ newInventario });
+      return res.status(201).json({ message: "Inventário criado com sucesso" });
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
 
   async adicionarItem(req: Request, res: Response) {
-    const { item_id } = req.body;
-    const { idInventario } = req.params;
+    const { id_item, id_inventario } = req.body;
 
     try {
       //VERIFICAR INVENTARIO
       const inventario = await inventariosReposiory.findOneBy({
-        id: String(idInventario),
+        id: String(id_inventario),
       });
 
       if (!inventario) {
@@ -57,7 +56,7 @@ export class InventariosController {
 
       //VERIFICAR ITEM
 
-      const item = await itensReposiory.findOneBy({ id: item_id });
+      const item = await itensReposiory.findOneBy({ id: id_item });
 
       if (!item) {
         return res.status(404).json({ message: "O item não existe" });
@@ -75,7 +74,7 @@ export class InventariosController {
   }
 
   async list(req: Request, res: Response) {
-    const { idPersonagem } = req.params;
+    const { id_personagem } = req.body;
 
     try {
       const inventario = await inventariosReposiory.find({
@@ -84,15 +83,13 @@ export class InventariosController {
         },
         where: {
           personagem: {
-            id: idPersonagem,
+            id: id_personagem,
           },
         },
       });
 
-      console.log(inventario);
-
       if (!inventario) {
-        return res.json("O usuário ainda não possui mesas");
+        return res.json("O personagem ainda não possui inventário");
       }
 
       return res.json(inventario);
