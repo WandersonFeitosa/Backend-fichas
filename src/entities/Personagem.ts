@@ -1,7 +1,7 @@
 import {
   Column,
   Entity,
-  JoinColumn, 
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -9,6 +9,11 @@ import {
 import { Inventario } from "./Inventario";
 import { Mesa } from "./Mesa";
 import { Usuario } from "./Usuarios";
+
+interface Pericia {
+  name: string;
+  valor: number;
+}
 
 @Entity("Personagens")
 export class Personagem {
@@ -89,6 +94,90 @@ export class Personagem {
 
   @Column({ type: "numeric" })
   vigor: Number;
+
+  @Column({ type: "numeric" })
+  acrobacia: Number;
+
+  @Column({ type: "numeric" })
+  adestramento: Number;
+
+  @Column({ type: "numeric" })
+  artes: Number;
+
+  @Column({ type: "numeric" })
+  atletismo: Number;
+
+  @Column({ type: "numeric" })
+  atualidades: Number;
+
+  @Column({ type: "numeric" })
+  ciencias: Number;
+
+  @Column({ type: "numeric" })
+  crime: Number;
+
+  @Column({ type: "numeric" })
+  diplomacia: Number;
+
+  @Column({ type: "numeric" })
+  enganacao: Number;
+
+  @Column({ type: "numeric" })
+  fortitude: Number;
+
+  @Column({ type: "numeric" })
+  furtividade: Number;
+
+  @Column({ type: "numeric" })
+  iniciativa: Number;
+
+  @Column({ type: "numeric" })
+  intimidação: Number;
+
+  @Column({ type: "numeric" })
+  intuicao: Number;
+
+  @Column({ type: "numeric" })
+  investigacao: Number;
+
+  @Column({ type: "numeric" })
+  luta: Number;
+
+  @Column({ type: "numeric" })
+  medicina: Number;
+
+  @Column({ type: "numeric" })
+  ocultismo: Number;
+
+  @Column({ type: "numeric" })
+  percepcao: Number;
+
+  @Column({ type: "numeric" })
+  pilotagem: Number;
+
+  @Column({ type: "numeric" })
+  pontaria: Number;
+
+  @Column({ type: "numeric" })
+  profissao: Number;
+
+  @Column({ type: "numeric" })
+  reflexos: Number;
+
+  @Column({ type: "numeric" })
+  religiao: Number;
+
+  @Column({ type: "numeric" })
+  sobreviencia: Number;
+
+  @Column({ type: "numeric" })
+  tatica: Number;
+
+  @Column({ type: "numeric" })
+  tecnologia: Number;
+
+  @Column({ type: "numeric" })
+  vontade: Number;
 
   @OneToOne(() => Inventario, (inventario) => inventario.personagem)
   @JoinColumn({ name: "invetario_id" })

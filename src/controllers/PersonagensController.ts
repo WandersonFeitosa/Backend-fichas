@@ -19,6 +19,34 @@ export class PersonagensController {
       presenca,
       afinidade,
       vigor,
+      acrobacia,
+      adestramento,
+      artes,
+      atletismo,
+      atualidades,
+      ciencias,
+      crime,
+      diplomacia,
+      enganacao,
+      fortitude,
+      furtividade,
+      iniciativa,
+      intimidação,
+      intuicao,
+      investigacao,
+      luta,
+      medicina,
+      ocultismo,
+      percepcao,
+      pilotagem,
+      pontaria,
+      profissao,
+      reflexos,
+      religiao,
+      sobreviencia,
+      tatica,
+      tecnologia,
+      vontade,
     } = req.body;
 
     //DEFAULT VALUES
@@ -33,8 +61,12 @@ export class PersonagensController {
     const res_conhecimento = 0;
 
     //CALCULADOR DE STATUS
+    if (nex == 99) {
+      var nivel_nex = 20;
+    } else {
+      var nivel_nex = Math.floor(nex / 5);
+    }
 
-    const nivel_nex = nex / 5 - 1;
     if (classe == "Combatente") {
       //Cálculo de PV
       let pv_adicional_classe = 4 + vigor;
@@ -96,7 +128,7 @@ export class PersonagensController {
       }
 
       //CRIAR PERSONAGEM
-      const newPersongaem = personagensReposiory.create({
+      const newPersonagem = personagensReposiory.create({
         nome,
         origem,
         nex,
@@ -122,11 +154,42 @@ export class PersonagensController {
         res_morte,
         res_energia,
         res_conhecimento,
+        acrobacia,
+        adestramento,
+        artes,
+        atletismo,
+        atualidades,
+        ciencias,
+        crime,
+        diplomacia,
+        enganacao,
+        fortitude,
+        furtividade,
+        iniciativa,
+        intimidação,
+        intuicao,
+        investigacao,
+        luta,
+        medicina,
+        ocultismo,
+        percepcao,
+        pilotagem,
+        pontaria,
+        profissao,
+        reflexos,
+        religiao,
+        sobreviencia,
+        tatica,
+        tecnologia,
+        vontade,
         usuario,
       });
 
-      await personagensReposiory.save(newPersongaem);
-      return res.status(201).json({ newPersongaem });
+      await personagensReposiory.save(newPersonagem);
+
+      return res.status(201).json({
+        message: "Seu personagem foi criado com sucesso",
+      });
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
@@ -175,7 +238,7 @@ export class PersonagensController {
             id: idUsuario,
           },
         },
-      });      
+      });
 
       if (!personagens) {
         return res.json("O usuário ainda não possui personagens");
