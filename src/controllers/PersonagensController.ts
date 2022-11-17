@@ -229,7 +229,7 @@ export class PersonagensController {
   }
 
   async list(req: Request, res: Response) {
-    const {  id_usuario } = req.body;
+    const { id_usuario } = req.params;
 
     try {
       const personagens = await personagensReposiory.find({

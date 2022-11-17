@@ -49,13 +49,13 @@ export class MesasController {
     }
   }
   async listPersonagensMesa(req: Request, res: Response) {
-    const { id_usuario } = req.body;
+    const { id_mesa } = req.params;
 
     try {
       const personagens = await personagensReposiory.find({
         where: {
           mesa: {
-            id: id_usuario,
+            id: id_mesa,
           },
         },
       });

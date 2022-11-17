@@ -7,24 +7,30 @@ import { PoderesController } from "../controllers/PoderesController";
 import { RituaisController } from "../controllers/RituaisController";
 import { UsuariosController } from "../controllers/UsuariosController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { headerMiddleware } from "../middlewares/headerMiddleware";
 
 const routes = Router();
 
+routes.use(headerMiddleware);
+
 //ROTAS DE USUARIO
-routes.post("/usuario", new UsuariosController().create);
+routes.post("/createUsuario", new UsuariosController().create);
 routes.post("/login", new UsuariosController().login);
 
-routes.use(authMiddleware);
+// routes.use(authMiddleware);
 
 routes.get("/profile", new UsuariosController().getProfile);
 
 //ROTAS DE MESA
 routes.get("/listMesa", new MesasController().listMesas);
-routes.get("/listarPersonagens/", new MesasController().listPersonagensMesa);
+routes.get(
+  "/listarPersonagensMesa/:id_mesa",
+  new MesasController().listPersonagensMesa
+);
 routes.post("/createMesa", new MesasController().create);
 
 //ROTAS DE PERSONGAEM
-routes.get("/listPersonagem", new PersonagensController().list);
+routes.get("/listPersonagem/:id_usuario", new PersonagensController().list);
 routes.post("/createPersonagem", new PersonagensController().create);
 routes.patch("/vincularMesa", new PersonagensController().vincularMesa);
 

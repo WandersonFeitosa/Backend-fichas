@@ -39,7 +39,7 @@ export class UsuariosController {
 
       await usuarioReposiory.save(newUsuario);
 
-      return res.status(201).json({ newUsuario });
+      return res.status(201).json({ message: "Usuário criado com sucesso" });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Internal Server Error" });
