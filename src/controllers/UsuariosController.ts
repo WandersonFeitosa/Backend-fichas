@@ -48,29 +48,38 @@ export class UsuariosController {
   async login(req: Request, res: Response) {
     const { username, senha } = req.body;
 
-    //VERIFICAR SE O USERNAME ESTÁ CORRETO
-    const user = await usuarioReposiory.findOneBy({ username });
+    try {
+      //VERIFICAR SE O USERNAME ESTÁ CORRETO
+      const user = await usuarioReposiory.findOneBy({ username });
 
-    if (!user) {
-      return res.status(400).json({ message: "Username ou senha invalidos" });
+      if (!user) {
+        return res.status(400).json({ message: "Username ou senha invalidos" });
+      }
+
+      //VERIFICAR SE A SENHA ESTÁ CORRETA
+      const verifySenha = await bcrypt.compare(senha, user.senha);
+
+      if (!verifySenha) {
+        return res.status(400).json({ message: "Username ou senha invalidos" });
+      }
+
+      const token = jwt.sign({ id: username.id }, process.env.JWT_PASS ?? "");
+
+      const userInfo = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.nome,
+        lastName: user.sobrenome,
+      };
+
+      return res.json({
+        message: "Logado",
+        token: token,
+        userInfo,
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error", error });
     }
-
-    //VERIFICAR SE A SENHA ESTÁ CORRETA
-    const verifySenha = await bcrypt.compare(senha, user.senha);
-
-    if (!verifySenha) {
-      return res.status(400).json({ message: "Username ou senha invalidos" });
-    }
-
-    const token = jwt.sign({ id: username.id }, process.env.JWT_PASS ?? "");
-
-    return res.json({
-      message: "tá logado",
-      token: token,
-    });
-  }
-
-  async getProfile(req: Request, res: Response) {
-    return res.json(req.user);
   }
 }

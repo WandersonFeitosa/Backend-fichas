@@ -29,7 +29,7 @@ export class MesasController {
     }
   }
   async listMesas(req: Request, res: Response) {
-    const { id_usuario } = req.body;
+    const { id_usuario } = req.params;
     try {
       const mesas = await mesasReposiory.find({
         where: {

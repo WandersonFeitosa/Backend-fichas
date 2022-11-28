@@ -19,10 +19,10 @@ routes.post("/login", new UsuariosController().login);
 
 // routes.use(authMiddleware);
 
-routes.get("/profile", new UsuariosController().getProfile);
+
 
 //ROTAS DE MESA
-routes.get("/listMesa", new MesasController().listMesas);
+routes.get("/listMesa/:id_usuario", new MesasController().listMesas);
 routes.get(
   "/listarPersonagensMesa/:id_mesa",
   new MesasController().listPersonagensMesa

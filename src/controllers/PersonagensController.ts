@@ -205,7 +205,7 @@ export class PersonagensController {
       });
 
       if (!personagem) {
-        return res.status(404).json({ message: "O personagem não existe" });
+        return res.status(404).json({ message: "O personagem não existe", personagem });
       }
 
       //VERIFICAR MESA
@@ -222,7 +222,9 @@ export class PersonagensController {
         mesa: mesa,
       });
 
-      return res.status(200).json(personagem);
+      return res
+        .status(200)
+        .json({ message: "Seu personagem foi vinculado com sucesso" });
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
