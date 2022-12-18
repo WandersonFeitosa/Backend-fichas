@@ -19,7 +19,9 @@ export class InventariosController {
         return res.status(404).json({ message: "O personagem não existe" });
       }
 
-      var capacidade = Number(personagem.forca) * 5;
+      //ARRUMAR ISSO DEPOIS
+      // var capacidade = Number(personagem.atributos.forca) * 5;
+      var capacidade = 5;
 
       if (capacidade < 5) {
         capacidade = 2;

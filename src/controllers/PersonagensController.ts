@@ -12,54 +12,15 @@ export class PersonagensController {
       classe,
       trilha,
       patente,
-      idade,
-      forca,
-      agilidade,
-      inteligencia,
-      presenca,
       afinidade,
-      vigor,
-      acrobacia,
-      adestramento,
-      artes,
-      atletismo,
-      atualidades,
-      ciencias,
-      crime,
-      diplomacia,
-      enganacao,
-      fortitude,
-      furtividade,
-      iniciativa,
-      intimidação,
-      intuicao,
-      investigacao,
-      luta,
-      medicina,
-      ocultismo,
-      percepcao,
-      pilotagem,
-      pontaria,
-      profissao,
-      reflexos,
-      religiao,
-      sobreviencia,
-      tatica,
-      tecnologia,
-      vontade,
+      versatilidade,
+      idade,
+      atributos,
+      pericias,
       id_usuario,
     } = req.body;
 
     //DEFAULT VALUES
-    var pv_max;
-    var pe_max;
-    var ps_max;
-    const res_fisica = 0;
-    const res_balistica = 0;
-    const res_sangue = 0;
-    const res_morte = 0;
-    const res_energia = 0;
-    const res_conhecimento = 0;
 
     //CALCULADOR DE STATUS
     if (nex == 99) {
@@ -67,55 +28,54 @@ export class PersonagensController {
     } else {
       var nivel_nex = Math.floor(nex / 5);
     }
+    let pv_max;
+    let pe_max;
+    let ps_max;
+    function calcularSaude(
+      vidaPorNivel: number,
+      vidaInicial: number,
+      pePorNivel: number,
+      peInicial: number,
+      sanidadePorNivel: number,
+      sanidadeInicial: number
+    ) {
+      //Cálculo de PV
+      let pv_adicional_classe = vidaPorNivel + atributos.vigor;
+      const pv_nivel_nex = nivel_nex * pv_adicional_classe;
+      pv_max = vidaInicial + atributos.vigor + pv_nivel_nex;
+
+      //Cálculo de PE
+      const pe_adicional_classe = pePorNivel + atributos.presenca;
+      const pe_nivel_nex = nivel_nex * pe_adicional_classe;
+      pe_max = peInicial + atributos.presenca + pe_nivel_nex;
+
+      //Cálculo de PS
+      const ps_nivel_nex = nivel_nex * sanidadePorNivel;
+      ps_max = sanidadeInicial + ps_nivel_nex;
+    }
 
     if (classe == "Combatente") {
-      //Cálculo de PV
-      let pv_adicional_classe = 4 + vigor;
-      const pv_nivel_nex = nivel_nex * pv_adicional_classe;
-      pv_max = 20 + vigor + pv_nivel_nex;
-
-      //Cálculo de PE
-      const pe_adicional_classe = 2 + presenca;
-      const pe_nivel_nex = nivel_nex * pe_adicional_classe;
-      pe_max = 2 + presenca + pe_nivel_nex;
-
-      //Cálculo de PS
-      const ps_nivel_nex = nivel_nex * 3;
-      ps_max = 12 + ps_nivel_nex;
+      calcularSaude(4, 20, 2, 2, 3, 12);
     }
     if (classe == "Especialista") {
-      //Cálculo de PV
-      let pv_adicional_classe = 3 + vigor;
-      const pv_nivel_nex = nivel_nex * pv_adicional_classe;
-      pv_max = 16 + vigor + pv_nivel_nex;
-
-      //Cálculo de PE
-      const pe_adicional_classe = 3 + presenca;
-      const pe_nivel_nex = nivel_nex * pe_adicional_classe;
-      pe_max = 3 + presenca + pe_nivel_nex;
-
-      //Cálculo de PS
-      const ps_nivel_nex = nivel_nex * 4;
-      ps_max = 16 + ps_nivel_nex;
+      calcularSaude(3, 16, 3, 3, 4, 16);
     }
     if (classe == "Ocultista") {
-      //Cálculo de PV
-      let pv_adicional_classe = 2 + vigor;
-      const pv_nivel_nex = nivel_nex * pv_adicional_classe;
-      pv_max = 12 + vigor + pv_nivel_nex;
-
-      //Cálculo de PE
-      const pe_adicional_classe = 4 + presenca;
-      const pe_nivel_nex = nivel_nex * pe_adicional_classe;
-      pe_max = 4 + presenca + pe_nivel_nex;
-
-      //Cálculo de PS
-      const ps_nivel_nex = nivel_nex * 5;
-      ps_max = 20 + ps_nivel_nex;
+      calcularSaude(2, 12, 4, 4, 5, 20);
     }
+
     const pv_atual = pv_max;
     const ps_atual = ps_max;
     const pe_atual = pe_max;
+
+    const saude = {
+      pv_max,
+      ps_max,
+      pe_max,
+      pv_atual,
+      ps_atual,
+      pe_atual,
+    };
     //CHECAR USUARIO
 
     try {
@@ -135,53 +95,12 @@ export class PersonagensController {
         classe,
         trilha,
         patente,
-        idade,
-        forca,
-        agilidade,
-        inteligencia,
-        presenca,
-        vigor,
         afinidade,
-        pv_max,
-        ps_max,
-        pe_max,
-        pv_atual,
-        ps_atual,
-        pe_atual,
-        res_fisica,
-        res_balistica,
-        res_sangue,
-        res_morte,
-        res_energia,
-        res_conhecimento,
-        acrobacia,
-        adestramento,
-        artes,
-        atletismo,
-        atualidades,
-        ciencias,
-        crime,
-        diplomacia,
-        enganacao,
-        fortitude,
-        furtividade,
-        iniciativa,
-        intimidação,
-        intuicao,
-        investigacao,
-        luta,
-        medicina,
-        ocultismo,
-        percepcao,
-        pilotagem,
-        pontaria,
-        profissao,
-        reflexos,
-        religiao,
-        sobreviencia,
-        tatica,
-        tecnologia,
-        vontade,
+        versatilidade,
+        idade,
+        atributos,
+        saude,
+        pericias,
         usuario,
       });
 
@@ -205,7 +124,9 @@ export class PersonagensController {
       });
 
       if (!personagem) {
-        return res.status(404).json({ message: "O personagem não existe", personagem });
+        return res
+          .status(404)
+          .json({ message: "O personagem não existe", personagem });
       }
 
       //VERIFICAR MESA
