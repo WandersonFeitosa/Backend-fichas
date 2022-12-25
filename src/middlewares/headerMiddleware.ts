@@ -6,19 +6,13 @@ export const headerMiddleware = async (
   next: NextFunction
 ) => {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "*");
 
   // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authentication, Authorization"
-  );
+  res.setHeader("Access-Control-Allow-Headers", "*");
   // Pass to next layer of middleware
   next();
 };

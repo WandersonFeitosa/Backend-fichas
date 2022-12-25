@@ -19,8 +19,6 @@ routes.post("/login", new UsuariosController().login);
 
 // routes.use(authMiddleware);
 
-
-
 //ROTAS DE MESA
 routes.get("/listMesa/:id_usuario", new MesasController().listMesas);
 routes.get(
