@@ -118,15 +118,16 @@ export class PersonagensController {
     const { id_mesa, personagem_id } = req.body;
 
     try {
+      if (personagem_id.length < 36 || personagem_id.length > 36) {
+        return res.status(404).json({ message: "Insira um ID válido" });
+      }
       //VERIFICAR PERSONAGEM
       const personagem = await personagensReposiory.findOneBy({
         id: String(personagem_id),
       });
 
       if (!personagem) {
-        return res
-          .status(404)
-          .json({ message: "O personagem não existe", personagem });
+        return res.status(404).json({ message: "O personagem não existe" });
       }
 
       //VERIFICAR MESA
