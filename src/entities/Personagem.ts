@@ -21,10 +21,10 @@ export class Personagem {
   id: string;
 
   @Column({ type: "text" })
-  nome: string;
+  name: string;
 
-  @Column({ type: "text" })
-  origem: string;
+  @Column({ type: "text" , nullable: true})
+  origin?: string;
 
   @Column({ type: "numeric" })
   nex: Number;
@@ -33,31 +33,31 @@ export class Personagem {
   classe: string;
 
   @Column({ type: "text", nullable: true })
-  trilha: string;
+  trail: string;
 
   @Column({ type: "text", nullable: true })
-  patente: string;
+  rank: string;
 
   @Column({ type: "numeric", nullable: true })
-  idade: Number;
+  age: Number;
 
   @Column({ type: "text", nullable: true })
-  afinidade: String;
+  afinity: String;
 
   @Column({ type: "text", nullable: true })
-  versatilidade: String;
+  versatility: String;
 
   @Column("jsonb", { nullable: true })
-  saude?: object;
+  stats?: object;
 
   @Column("jsonb", { nullable: true })
-  resistencias?: object;
+  resistances?: object;
 
   @Column("jsonb", { nullable: true })
-  atributos?: object;
+  attributes?: object;
 
   @Column("jsonb", { nullable: true })
-  pericias?: object;
+  skills?: object;
 
   @OneToOne(() => Inventario, (inventario) => inventario.personagem)
   @JoinColumn({ name: "invetario_id" })

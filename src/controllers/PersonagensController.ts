@@ -6,17 +6,17 @@ import { usuarioReposiory } from "../repositories/usuariosRepository";
 export class PersonagensController {
   async create(req: Request, res: Response) {
     const {
-      nome,
-      origem,
+      name,
+      origin,
       nex,
       classe,
-      trilha,
-      patente,
-      afinidade,
-      versatilidade,
-      idade,
-      atributos,
-      pericias,
+      trail,
+      rank,
+      afinity,
+      versatility,
+      age,
+      attributes,
+      skills,
       id_usuario,
     } = req.body;
 
@@ -40,14 +40,14 @@ export class PersonagensController {
       sanidadeInicial: number
     ) {
       //Cálculo de PV
-      let pv_adicional_classe = vidaPorNivel + atributos.vigor;
+      let pv_adicional_classe = vidaPorNivel + attributes.vig;
       const pv_nivel_nex = nivel_nex * pv_adicional_classe;
-      pv_max = vidaInicial + atributos.vigor + pv_nivel_nex;
+      pv_max = vidaInicial + attributes.vig + pv_nivel_nex;
 
       //Cálculo de PE
-      const pe_adicional_classe = pePorNivel + atributos.presenca;
+      const pe_adicional_classe = pePorNivel + attributes.pre;
       const pe_nivel_nex = nivel_nex * pe_adicional_classe;
-      pe_max = peInicial + atributos.presenca + pe_nivel_nex;
+      pe_max = peInicial + attributes.pre + pe_nivel_nex;
 
       //Cálculo de PS
       const ps_nivel_nex = nivel_nex * sanidadePorNivel;
@@ -68,7 +68,7 @@ export class PersonagensController {
     const ps_atual = ps_max;
     const pe_atual = pe_max;
 
-    const saude = {
+    const stats = {
       pv_max,
       ps_max,
       pe_max,
@@ -89,18 +89,18 @@ export class PersonagensController {
 
       //CRIAR PERSONAGEM
       const newPersonagem = personagensReposiory.create({
-        nome,
-        origem,
+        name,
+        origin,
         nex,
         classe,
-        trilha,
-        patente,
-        afinidade,
-        versatilidade,
-        idade,
-        atributos,
-        saude,
-        pericias,
+        trail,
+        rank,
+        afinity,
+        versatility,
+        age,
+        attributes,
+        stats,
+        skills,
         usuario,
       });
 
