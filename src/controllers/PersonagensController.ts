@@ -40,14 +40,14 @@ export class PersonagensController {
       sanidadeInicial: number
     ) {
       //Cálculo de PV
-      let pv_adicional_classe = vidaPorNivel + attributes.vig;
+      let pv_adicional_classe = vidaPorNivel + Number(attributes.vig);
       const pv_nivel_nex = nivel_nex * pv_adicional_classe;
-      pv_max = vidaInicial + attributes.vig + pv_nivel_nex;
+      pv_max = vidaInicial + Number(attributes.vig) + pv_nivel_nex;
 
       //Cálculo de PE
-      const pe_adicional_classe = pePorNivel + attributes.pre;
+      const pe_adicional_classe = pePorNivel + Number(attributes.pre);
       const pe_nivel_nex = nivel_nex * pe_adicional_classe;
-      pe_max = peInicial + attributes.pre + pe_nivel_nex;
+      pe_max = peInicial + Number(attributes.pre) + pe_nivel_nex;
 
       //Cálculo de PS
       const ps_nivel_nex = nivel_nex * sanidadePorNivel;
